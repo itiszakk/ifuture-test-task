@@ -1,0 +1,5 @@
+rootProject.name = 'ifuture-test-task'
+
+include 'client'
+include 'server'
+
