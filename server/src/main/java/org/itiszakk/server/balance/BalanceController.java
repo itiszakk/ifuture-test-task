@@ -31,10 +31,6 @@ public class BalanceController {
     }
 
     private void verifyBalanceDTO(BalanceDTO balance) {
-        if (balance == null) {
-            throw new BalanceDTOException("Object is missing");
-        }
-
         if (balance.id() == null) {
             throw new BalanceDTOException("Parameter 'id' is missing");
         }

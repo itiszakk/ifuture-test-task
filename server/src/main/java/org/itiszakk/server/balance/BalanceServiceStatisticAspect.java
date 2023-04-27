@@ -14,28 +14,28 @@ import java.util.concurrent.atomic.LongAdder;
 @Component
 public class BalanceServiceStatisticAspect {
 
-    private final static String USAGE_DELAY_STRING = "PT10S";
-
     private final static Logger logger = LoggerFactory.getLogger(BalanceServiceStatisticAspect.class);
+
+    private final static String USAGE_DELAY_STRING = "PT10S";
 
     private final LongAdder getBalanceCalls = new LongAdder();
     private final LongAdder changeBalanceCalls = new LongAdder();
     private final LongAdder overallCalls = new LongAdder();
 
     @Before("execution(* org.itiszakk.server.balance.BalanceServiceImpl.getBalance(..))")
-    public void logGetBalanceRequest(JoinPoint joinPoint) {
+    public void incrementGetBalanceCalls(JoinPoint joinPoint) {
         getBalanceCalls.increment();
         overallCalls.increment();
     }
 
     @Before("execution(* org.itiszakk.server.balance.BalanceServiceImpl.changeBalance(..))")
-    public void logChangeBalanceRequest(JoinPoint joinPoint) {
+    public void incrementChangeBalanceCalls(JoinPoint joinPoint) {
         changeBalanceCalls.increment();
         overallCalls.increment();
     }
 
     @Scheduled(initialDelayString = USAGE_DELAY_STRING, fixedDelayString = USAGE_DELAY_STRING)
-    public void logUsage() {
+    public void logCallsPerTime() {
         logger.info("Method getBalance calls: {}", getBalanceCalls.sumThenReset());
         logger.info("Method changeBalance calls: {}", changeBalanceCalls.sumThenReset());
         logger.info("Overall calls: {}", overallCalls.sumThenReset());

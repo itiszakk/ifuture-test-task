@@ -3,7 +3,7 @@ create schema if not exists balances;
 set search_path to balances;
 
 create table if not exists balance (
-    id serial primary key,
+    id bigserial primary key,
     amount bigint
 );
 
