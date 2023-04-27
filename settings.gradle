@@ -1,5 +1,6 @@
 rootProject.name = 'ifuture-test-task'
 
+include 'shared'
 include 'client'
 include 'server'
 
