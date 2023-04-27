@@ -7,19 +7,11 @@ plugins {
 allprojects {
     group = 'org.itiszakk'
     version = '1.0-SNAPSHOT'
-    sourceCompatibility = '17'
+    sourceCompatibility = 17
 
     repositories {
         mavenCentral()
     }
-
-    test {
-        useJUnitPlatform()
-    }
-}
-
-subprojects {
-    apply plugin: 'java'
 }
 
 bootJar {
